@@ -49,3 +49,17 @@ Parce qu'on a mis des bords arrondis sur la Card. Si on ne met pas le clipBehavi
 
 ### Q4.8 
 Parce que quand on clique sur les boutons "Favoris" ou "Lu", on modifie l'état du livre . Il faut donc un StatefulWidget avec setState pour que l'icône change .
+
+## Partie 05
+
+### Q5.2 
+Pour une grille verticale, l'axe principal  c'est l'axe de haut en bas (celui dans lequel on scrolle). L'axe secondaire  c'est l'axe de gauche à droite . Du coup, mainAxisSpacing c'est l'espace entre les lignes, et crossAxisSpacing c'est l'espace entre les colonnes.
+
+### Q5.3 
+C'est le ratio 0.7. Comme la formule c'est Largeur / Hauteur, un chiffre inférieur à 1 veut dire que la case est plus haute que large. Ça fait exactement la forme d'un livre.
+
+### Q5.6 
+Avec GridView.count on choisit un nombre de colonnes fixe . Avec GridView.extent, on donne une largeur maximale pour chaque case  et Flutter calcule tout seul combien de colonnes peuvent rentrer dans l'écran. Si on redimensionne la fenêtre avec extent, le nombre de colonnes change automatiquement, ce qui n'est pas le cas avec count.
+
+### Question de réflexion
+L'inconvénient de GridView.count et extent quand on a beaucoup d'éléments, c'est que Flutter va charger TOUS les éléments d'un coup en mémoire. Si on a 1000 livres, l'application va ramer et risque de planter. Pour éviter ça, il faudra utiliser GridView.builder à la Partie 06.
