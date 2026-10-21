@@ -1,76 +1,76 @@
-import 'package:flutter/material.dart';
-import 'screens/parametres_screen.dart';
-import 'models/livre.dart';
-import 'data/livres_data.dart';
+  import 'package:flutter/material.dart';
+  import 'screens/parametres_screen.dart';
+  import 'models/livre.dart';
+  import 'data/livres_data.dart';
 
-void main() {
-  runApp(const MaBiblioApp());
-}
-
-class MaBiblioApp extends StatelessWidget {
-  const MaBiblioApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MaBiblio',
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.indigo),
-      home: const ParametresScreen(), // Lance directement sur les paramètres
-    );
+  void main() {
+    runApp(const MaBiblioApp());
   }
-}
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-  
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+  class MaBiblioApp extends StatelessWidget {
+    const MaBiblioApp({super.key});
 
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-            appBar: AppBar(
-        title: const Text('MaBiblio'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const ParametresScreen()),
-              );
-            },
-          ),
-        ],
+    @override
+    Widget build(BuildContext context) {
+      return MaterialApp(
+        title: 'MaBiblio',
+        theme: ThemeData(useMaterial3: true, colorSchemeSeed: Colors.indigo),
+        home: const ParametresScreen(), // Lance directement sur les paramètres
+      );
+    }
+  }
+
+  class HomePage extends StatefulWidget {
+    const HomePage({super.key});
+    
+    @override
+    State<HomePage> createState() => _HomePageState();
+  }
+
+  class _HomePageState extends State<HomePage> {
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+              appBar: AppBar(
+          title: const Text('MaBiblio'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ParametresScreen()),
+                );
+              },
+            ),
+          ],
+        ),
+         body: ListView.separated(
+        itemCount: livres.length,
+        separatorBuilder: (context, index) => const Divider(indent: 72),
+        itemBuilder: (context, index) {
+          return livreTile(livres[index]);
+        },
       ),
-            body: ListView(
+      );
+    }
+  }
+  Widget livreTile(Livre livre) {
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundColor: livre.couleur,
+        foregroundColor: Colors.white,
+        child: Text(livre.titre[0].toUpperCase()),
+      ),
+      title: Text(livre.titre),
+      subtitle: Text('${livre.auteur} – ${livre.annee}'),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          livreTile(livres[0]),
-          livreTile(livres[1]),
-          livreTile(livres[2]),
+          Text(livre.note.toStringAsFixed(1)),
+          const SizedBox(width: 4),
+          const Icon(Icons.star, color: Colors.amber, size: 20),
         ],
       ),
     );
   }
-}
-Widget livreTile(Livre livre) {
-  return ListTile(
-    leading: CircleAvatar(
-      backgroundColor: livre.couleur,
-      foregroundColor: Colors.white,
-      child: Text(livre.titre[0].toUpperCase()),
-    ),
-    title: Text(livre.titre),
-    subtitle: Text('${livre.auteur} – ${livre.annee}'),
-    trailing: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(livre.note.toStringAsFixed(1)),
-        const SizedBox(width: 4),
-        const Icon(Icons.star, color: Colors.amber, size: 20),
-      ],
-    ),
-  );
-}
