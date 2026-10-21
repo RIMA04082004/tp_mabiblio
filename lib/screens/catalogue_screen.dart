@@ -27,13 +27,27 @@ class CatalogueScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               children: [
                 for (var livre in livres.where((l) => l.nouveaute))
-                  Container(
+                                    Container(
                     width: 110,
                     margin: const EdgeInsets.only(right: 12),
-                    decoration: BoxDecoration(color: livre.couleur, borderRadius: BorderRadius.circular(12)),
+                    decoration: BoxDecoration(
+                      // On enlève la couleur du livre, on met du blanc (ou un gris très clair)
+                      color: Colors.grey.shade200, 
+                      borderRadius: BorderRadius.circular(12),
+                      // On ajoute une petite bordure noire pour bien délimiter
+                      border: Border.all(color: Colors.black, width: 1), 
+                    ),
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(8),
-                    child: Text(livre.titre, textAlign: TextAlign.center, style: const TextStyle(color: Colors.white)),
+                    child: Text(
+                      livre.titre, 
+                      textAlign: TextAlign.center, 
+                      // On met le texte en noir et en gras
+                      style: const TextStyle(
+                        color: Colors.black, 
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
               ],
             ),
